@@ -1,0 +1,19 @@
+{
+  "name": "devops-interview",
+  "version": "1.0.0",
+  "description": "\"CSV test for SRE team\"",
+  "main": "main.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CristinaRevieve/csv-test.git"
+  },
+  "author": "Cristina Seva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CristinaRevieve/csv-test/issues"
+  },
+  "homepage": "https://github.com/CristinaRevieve/csv-test#readme"
+}
