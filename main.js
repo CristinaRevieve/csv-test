@@ -1,19 +1,13 @@
-const { type } = require("os");
+//const { type } = require("os");
 
 //constants
 const readline = require("readline"),
     fs = require("fs"),
     orders_file = "./orders.csv",
     customers_file = "customers.csv",
-    products_file = "products.csv";
+    products_file = "products.csv",
+    order_prices_file = "order_prices.csv";
 
-
-
-
-
-//I don't understand this
-//const rl = readline.createInterface({ input: fs.readFileSync(orders_file) });
-//const data = fs.readFileSync(0, "utf8");
 
 
 //getProducts(getDocument(orders_file));
@@ -24,7 +18,7 @@ for(let i=1 ; i< orders_matrix.length; i++){
 //for(let i=2 ; i< 3; i++){
   let order_price = 0;
 
-  let products_ids = orders_matrix[i][2].split('')
+  let products_ids = orders_matrix[i][2].split('')  //wrong
   let a = products_ids.map(id => parseInt(id))
   const newArray = a.filter(function (value) {
     return !Number.isNaN(value);
@@ -39,11 +33,55 @@ for(let i=1 ; i< orders_matrix.length; i++){
     order_price = order_price + temp;
     //console.log(id+ ':'+ temp +'...' + order_price+ ':'+ index+'|'+id.toString())
   }
-  console.log(order_price)
-  orders_costs.push(order_price)
-  
+  orders_costs.push(order_price.toString()) //I'm not sure if there is a problem with it being a number
 }
+// espacio para pegar matrices
+let temp_matrix = transpose(orders_matrix)
+temp_matrix.push(orders_costs)
 
+let x = temp_matrix.splice(1, 2)
+let order_prices = transpose(temp_matrix)
+
+console.log(order_prices)
+//espacio para escribir en csv
+
+
+ outPutCsv(order_prices_file);// no llamo a la funcion aun porque aun no esta
+
+function outPutCsv (file_name){
+  writeDocument("", order_prices_file)  
+  function writeComma(){fs.appendFile(file_name, ',', function (err) {
+        if (err) {
+        } else { 
+        }
+      })
+  }
+  function breakLine(){ fs.appendFile(file_name, '\r\n', function (err) {
+    if (err) {
+    } else { 
+    }
+  })}
+  function writeLine(string){ fs.appendFile(file_name, string, function (err) {
+    if (err) {
+    } else { 
+    }
+  })}
+
+ for (let i = 0; i < order_prices.length; i++){
+    //for (let j = 0; j < 2; j++){
+      writeLine(order_prices[i].join() + '\r\n')
+      /*switch (j) {
+        case 0:
+          writeComma(); 
+          break;
+        case 1:
+          breakLine()
+      }*/
+    
+    //}
+  }
+}
+ 
 function getDocument(file) {
     const raw_data = fs.readFileSync(file, 'utf-8'); //single string with all the data
     let array_of_strings = raw_data.split("\r\n");    // Each element of the array is a string with a whole line 
@@ -76,3 +114,13 @@ function transpose(matrix) {
     }
     return grid;
   }
+
+  function writeDocument(string_data, file) {
+    fs.writeFile(file, string_data, function (err) {
+      if (err) return console.log(err);
+      //console.log('Hello World > helloworld.txt');
+    });
+  }
+
+
+  // function to parse an array to a coma separated string
