@@ -13,17 +13,18 @@ let orders_costs = ["euros"];
 for (let i = 1; i < orders_matrix.length; i++) {
   let order_price = 0;
 
-  let products_ids = orders_matrix[i][2].split("\s+"); //wrong
+  let products_ids = orders_matrix[i][2].split(" "); //wrong
   let a = products_ids.map((id) => parseInt(id));
   const newArray = a.filter(function (value) {
     return !Number.isNaN(value);
   });
   products_ids = newArray;
-
+  console.log(products_ids)
   for (let id of products_ids) {
     let index = product_matrix[0].indexOf(id.toString());
     let temp = parseFloat(product_matrix[2][index]);
     order_price = order_price + temp;
+
   }
   orders_costs.push(order_price.toString());
 }
@@ -33,6 +34,7 @@ temp_matrix.push(orders_costs);
 
 let x = temp_matrix.splice(1, 2);
 let order_prices = transpose(temp_matrix);
+
 
 
 //CVS writing
@@ -49,7 +51,7 @@ function outPutCsv(file_name) {
   }
 
   for (let i = 0; i < order_prices.length; i++) {
-    writeLine(order_prices[i].join() + "\r\n");
+    writeLine(order_prices[i].join() + "\n");
   }
 }
 
@@ -64,7 +66,7 @@ function getDocument(file) {
 
 function getProducts(matrix) {
   let mat = transpose(matrix);
-  const array = mat[2].map((line) => line.split("\s+"));
+  const array = mat[2].map((line) => line.split(/\s+/gm));
 }
 
 function transpose(matrix) {
