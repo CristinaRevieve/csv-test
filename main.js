@@ -13,7 +13,7 @@ let orders_costs = ["euros"];
 for (let i = 1; i < orders_matrix.length; i++) {
   let order_price = 0;
 
-  let products_ids = orders_matrix[i][2].split(""); //wrong
+  let products_ids = orders_matrix[i][2].split("\s+"); //wrong
   let a = products_ids.map((id) => parseInt(id));
   const newArray = a.filter(function (value) {
     return !Number.isNaN(value);
@@ -64,7 +64,7 @@ function getDocument(file) {
 
 function getProducts(matrix) {
   let mat = transpose(matrix);
-  const array = mat[2].map((line) => line.split(" "));
+  const array = mat[2].map((line) => line.split("\s+"));
 }
 
 function transpose(matrix) {
