@@ -63,10 +63,6 @@ function getDocument(file) {
   return file_matrix;
 }
 
-function getProducts(matrix) {
-  let mat = transpose(matrix);
-  const array = mat[2].map((line) => line.split(/\s+/gm));
-}
 
 function transpose(matrix) {
   const rows = matrix.length,
