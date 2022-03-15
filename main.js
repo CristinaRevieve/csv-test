@@ -19,7 +19,6 @@ for (let i = 1; i < orders_matrix.length; i++) {
     return !Number.isNaN(value);
   });
   products_ids = newArray;
-  console.log(products_ids)
   for (let id of products_ids) {
     let index = product_matrix[0].indexOf(id.toString());
     let temp = parseFloat(product_matrix[2][index]);
