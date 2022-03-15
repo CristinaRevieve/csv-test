@@ -1,3 +1,20 @@
+//TESTS
+//testing transpose function
+if (compareArrays(transpose(transpose([[1]])),[[1]])) {
+  if(compareArrays(transpose([[1,2],[3,4]]),[[1,3],[2,4]])){
+  } else {
+      throw "Function transpose is failing"
+  } 
+}
+//testing compare arrays
+if (compareArrays([1],[1]) ) {
+  if(compareArrays([1,2,3,[7,8,9],10.9],[1,2,3,[7,8,9],10.9])){
+  } else {
+      throw "Function compareArrays is failing"
+  } 
+}
+
+
 //constants
 const readline = require("readline"),
   fs = require("fs"),
@@ -65,6 +82,7 @@ function getDocument(file) {
 
 
 function transpose(matrix) {
+  try{
   const rows = matrix.length,
     cols = matrix[0].length;
   const grid = [];
@@ -76,8 +94,11 @@ function transpose(matrix) {
       grid[j][i] = matrix[i][j];
     }
   }
-  return grid;
+  return grid;} catch (err){
+    console.log("Transpose function needs a matrix as parameter.", err)
+  }
 }
+
 
 function writeDocument(string_data, file) {
   fs.writeFile(file, string_data, function (err) {
@@ -85,4 +106,8 @@ function writeDocument(string_data, file) {
   });
 }
 
+function compareArrays(array1,array2){
+  let are_iqual = JSON.stringify(array1)===JSON.stringify(array2)
+  return are_iqual
+}
 
